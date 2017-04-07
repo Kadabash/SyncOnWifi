@@ -25,13 +25,13 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Obtain network information:
         NetworkInfo newNetworkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         //TODO: allow multiple SSIDs to be entered
 
-        AccountManager accountManager = AccountManager.get(context);
-        SharedPreferences sharedPreferencesActiveAccounts = context.getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+        AccountManager accountManager = AccountManager.get(context.getApplicationContext());
+        SharedPreferences sharedPreferencesActiveAccounts = context.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
 
         //If we are disconnected/disconnecting from a trusted network, disable account synchronisation:
         if((wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) || (wifiManager.getWifiState() ==  WifiManager.WIFI_STATE_DISABLING)) {
@@ -45,7 +45,6 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
                         if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
                             //Actually switch syncing off:
                             ContentResolver.setSyncAutomatically(account, syncAdapterType.authority, false);
-                            return;
                         }
                     }
                 }
@@ -53,7 +52,7 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         }
 
         NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        SharedPreferences sharedPreferencesSSID = context.getSharedPreferences("TrustedSSID", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesSSID = context.getApplicationContext().getSharedPreferences("TrustedSSID", Context.MODE_PRIVATE);
 
         //If we are connected to a trusted network, enable account synchronisation:
         if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION) && networkInfo.isConnected()) {
@@ -70,7 +69,6 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
                             if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
                                 //Actually switch syncing on:
                                 ContentResolver.setSyncAutomatically(account, syncAdapterType.authority, true);
-                                return;
                             }
                         }
                     }

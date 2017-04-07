@@ -3,6 +3,8 @@ package org.t2.synconwifi;
 import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +14,16 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Set;
 
-/**
- * Created by t2 on 07.04.17.
- */
 
-public class AccountListAdapter extends ArrayAdapter<Account> {
+class AccountListAdapter extends ArrayAdapter<Account> {
     private ArrayList<Account> accountList;
     private Context mContext;
 
-    public AccountListAdapter(Context context, int textViewId, ArrayList<Account> accountList) {
+    AccountListAdapter(Context context, int textViewId, ArrayList<Account> accountList) {
         super(context, textViewId, accountList);
         this.mContext = context;
-        this.accountList = new ArrayList<Account>();
+        this.accountList = new ArrayList<>();
         this.accountList.addAll(accountList);
     }
 
@@ -35,13 +33,13 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
         TextView textViewAccountName;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+    @Override @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
 
         if(convertView == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.account_list_item, null);
+            LayoutInflater layoutInflater = LayoutInflater.from(mContext.getApplicationContext());
+            convertView = layoutInflater.inflate(R.layout.account_list_item, parent, false);
 
             holder = new ViewHolder();
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.accountListItemCheckBox);
@@ -52,7 +50,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    SharedPreferences sharedPreferences = mContext.getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
                     Account associatedAccount = (Account) buttonView.getTag();
                     String accountTypeAndName = associatedAccount.type + ";" + associatedAccount.name;     //Accounts are identified in AccountsActive preferences by their type and name, separated by a ";".
                     boolean isActiveAccount = sharedPreferences.getBoolean(accountTypeAndName, false);
@@ -60,13 +58,13 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
                         if(!isChecked) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean(accountTypeAndName, false);        //Set account inactive.
-                            editor.commit();
+                            editor.apply();
                         }
                     } else {
                         if(isChecked) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean(accountTypeAndName, true);       //Set account active.
-                            editor.commit();
+                            editor.apply();
                         }
                     }
 
@@ -85,7 +83,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
         holder.textViewAccountType.setTag(account);
 
         //Set checked state from shared preferences:
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
         String accountTypeAndName = account.type + ";" + account.name;     //Accounts are identified in AccountsActive preferences by their type and name, separated by a ";".
         holder.checkBox.setChecked(sharedPreferences.getBoolean(accountTypeAndName, false));
 
