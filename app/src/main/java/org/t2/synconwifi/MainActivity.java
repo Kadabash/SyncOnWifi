@@ -2,14 +2,19 @@ package org.t2.synconwifi;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +26,7 @@ import java.util.jar.Manifest;
 public class MainActivity extends AppCompatActivity {
 
     public static final int PERMISSION_GRANTED_GET_CONTACTS = 1;
+    public static final int PERMISSION_GRANTED_WRITE_SYNC_SETTIGNS = 2;
     private AccountListAdapter listAdapter = null;
 
     private LinearLayout mainActivityLayout;
@@ -35,17 +41,38 @@ public class MainActivity extends AppCompatActivity {
         this.mainActivityLayout = (LinearLayout) findViewById(R.id.mainActivityLayout);
         this.accountListView = new ListView(mainActivityLayout.getContext());
 
-        //Ask for runtime permission to access accounts:
-        int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.GET_ACCOUNTS);
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+        //Ask for runtime permissions:
+        int permissionCheckGetAccounts = ContextCompat.checkSelfPermission(this, android.Manifest.permission.GET_ACCOUNTS);
+        if(permissionCheckGetAccounts != PackageManager.PERMISSION_GRANTED) {
             //TODO: explain why the permission is needed (as in https://developer.android.com/training/permissions/requesting.html#perm-request)
-
             ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.GET_ACCOUNTS}, PERMISSION_GRANTED_GET_CONTACTS);
         } else {
             setUpListView();
         }
 
-        //Program flow continues in function setUpListView().
+        //Add an input field for Wifi SSID:
+        EditText editTextSSID = (EditText) findViewById(R.id.editTextSSID);
+        SharedPreferences sharedPreferencesSSID = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
+        String ssidFromSharedPreferences = sharedPreferencesSSID.getString("SSID", "");
+        if(!ssidFromSharedPreferences.equals("")) {
+            editTextSSID.setText(ssidFromSharedPreferences);
+        }
+        editTextSSID.setHint("SSID of trusted WIFI network");
+        editTextSSID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("SSID", s.toString());
+                editor.commit();
+            }
+        });
     }
 
     private void setUpListView() {
@@ -67,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_GRANTED_GET_CONTACTS: {
-
                 //If permission has been granted:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     setUpListView();
@@ -75,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     //If permission has NOT been granted:
                     Toast.makeText(this, "This app will not function without permission to read accounts. Please open the app again and grant it.", Toast.LENGTH_LONG).show(); //TODO: Internationalise string
                 }
-            }
-            break;
-            //More cases can be added to this switch if more permissions are required.
+            } break;
         }
     }
 }
