@@ -23,6 +23,12 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //Check if service is activated:
+        SharedPreferences sharedPreferencesSettings = context.getApplicationContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        if(!sharedPreferencesSettings.getBoolean("ServiceEnabled", false)) {
+            return;
+        }
+
         //Obtain network information:
         NetworkInfo newNetworkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);

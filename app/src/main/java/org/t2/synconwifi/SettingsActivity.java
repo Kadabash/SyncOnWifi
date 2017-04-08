@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +33,28 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        //Add checkbox to disable app functionality:
+        CheckBox serviceCheckBox = (CheckBox) findViewById(R.id.serviceSettingCheckBox);
+        SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences("Settings", MODE_PRIVATE);
+        serviceCheckBox.setChecked(sharedPreferencesSettings.getBoolean("ServiceEnabled", false));
+        serviceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences("Settings", MODE_PRIVATE);
+                boolean serviceEnabled = sharedPreferencesSettings.getBoolean("ServiceEnabled", false);
+                if(serviceEnabled && !isChecked) {
+                    SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
+                    editor.putBoolean("ServiceEnabled", false);
+                    editor.apply();
+                }
+                if(!serviceEnabled && isChecked) {
+                    SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
+                    editor.putBoolean("ServiceEnabled", true);
+                    editor.apply();
+                }
+            }
+        });
 
         //Create checkbox list to select accounts to control:
         this.accountListView = (ListView) findViewById(R.id.accountSettingListView);
