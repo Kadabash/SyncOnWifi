@@ -4,42 +4,36 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.jar.Manifest;
+import java.util.Arrays;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
+public class SettingsActivity extends AppCompatActivity {
     public static final int PERMISSION_GRANTED_GET_CONTACTS = 1;
     public static final int PERMISSION_GRANTED_WRITE_SYNC_SETTIGNS = 2;
     private AccountListAdapter listAdapter = null;
 
-    private LinearLayout mainActivityLayout;
     private ListView accountListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
         //Create checkbox list to select accounts to control:
-        this.mainActivityLayout = (LinearLayout) findViewById(R.id.mainActivityLayout);
-        this.accountListView = new ListView(mainActivityLayout.getContext());
+        this.accountListView = (ListView) findViewById(R.id.accountSettingListView);
 
         //Ask for runtime permissions:
         int permissionCheckGetAccounts = ContextCompat.checkSelfPermission(this, android.Manifest.permission.GET_ACCOUNTS);
@@ -51,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Add an input field for Wifi SSID:
-        EditText editTextSSID = (EditText) findViewById(R.id.editTextSSID);
+        EditText editTextSSID = (EditText) findViewById(R.id.ssidSettingEditText);
         SharedPreferences sharedPreferencesSSID = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
         String ssidFromSharedPreferences = sharedPreferencesSSID.getString("SSID", "");
         if(!ssidFromSharedPreferences.equals("")) {
@@ -70,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("SSID", s.toString());
-                editor.commit();
+                editor.apply();
             }
         });
     }
@@ -79,19 +73,15 @@ public class MainActivity extends AppCompatActivity {
         //Get Accounts:
         AccountManager accountManager = AccountManager.get(this);
         Account[] accounts = accountManager.getAccounts();
-        ArrayList<Account> accountArrayList = new ArrayList<Account>();
-        for(Account account : accounts) {
-            accountArrayList.add(account);
-        }
+        ArrayList<Account> accountArrayList = new ArrayList<>(Arrays.asList(accounts));
 
         //Set list adapter and add list to layout:
         this.listAdapter = new AccountListAdapter(this, R.layout.account_list_item, accountArrayList);
         this.accountListView.setAdapter(listAdapter);
-        this.mainActivityLayout.addView(this.accountListView);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_GRANTED_GET_CONTACTS: {
                 //If permission has been granted:
