@@ -7,75 +7,105 @@
     tools:context="org.t2.synconwifi.SettingsActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:showDividers="middle"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerPadding="15dp"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:weightSum="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1">
-
-        <TextView
-            android:id="@+id/serviceSettingHeadlineTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Service" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <CheckBox
-                android:id="@+id/serviceSettingCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start" />
-
             <TextView
-                android:id="@+id/serviceSettingTextView"
+                android:id="@+id/serviceSettingHeadlineTextView"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Enable Service" />
+                android:text="Service" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal" >
+
+                <CheckBox
+                    android:id="@+id/serviceSettingCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start" />
+
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/serviceSettingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Enable Service"
+                    android:textSize="18dp"/>
+
+                </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/accountSettingHeadlineTextView"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Accounts" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/accountSettingHeadlineTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Accounts" />
 
-        <ListView
-            android:id="@+id/accountSettingListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/accountSettingsButton"
+                android:text="Select Accounts"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
 
-        </ListView>
-
-        <TextView
-            android:id="@+id/ssidSettingHeadlineTextView"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Wifi" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp" >
+            <TextView
+                android:id="@+id/ssidSettingHeadlineTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Wifi" />
 
-        <EditText
-            android:id="@+id/ssidSettingEditText"
-            android:hint="SSID of trusted WiFi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-
+            <EditText
+                android:id="@+id/ssidSettingEditText"
+                android:hint="SSID of trusted WiFi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
