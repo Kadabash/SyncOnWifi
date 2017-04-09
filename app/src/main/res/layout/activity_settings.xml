@@ -94,12 +94,13 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/ssid_setting_headline" />
 
-            <EditText
-                android:id="@+id/ssidSettingEditText"
-                android:hint="SSID of trusted WiFi"
+            <Button
+                android:id="@+id/ssidSettingsButton"
+                android:text="@string/ssid_settings_button_text"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

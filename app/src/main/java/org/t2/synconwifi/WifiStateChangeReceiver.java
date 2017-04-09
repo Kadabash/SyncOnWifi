@@ -34,12 +34,10 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
-        //TODO: allow multiple SSIDs to be entered
-
         AccountManager accountManager = AccountManager.get(context.getApplicationContext());
         SharedPreferences sharedPreferencesActiveAccounts = context.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
 
-        //If we are disconnected/disconnecting from a trusted network, disable account synchronisation:
+        //If we are disconnected/disconnecting from any network, disable account synchronisation:
         if((wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) || (wifiManager.getWifiState() ==  WifiManager.WIFI_STATE_DISABLING)) {
             //Check whether each account is in the shared preferences of active accounts:
             for(Account account : accountManager.getAccounts()) {
@@ -64,7 +62,8 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION) && networkInfo.isConnected()) {
             //Check if the connected SSID is in shared preferences "TrustedSSID", key "SSID":
             String ssid = wifiInfo.getSSID();   //SSID is surrounded by quotation marks here. Remove them in the next line.
-            if(sharedPreferencesSSID.getString("SSID", "").equals(ssid.substring(1, ssid.length() - 1))) {
+            ssid = ssid.substring(1, ssid.length() - 1);
+            if(sharedPreferencesSSID.getBoolean(ssid, false)) {
                 //Check whether each account is in the shared preferences of active accounts:
                 for(Account account : accountManager.getAccounts()) {
                     String accountTypeAndName = account.type + ";" + account.name;

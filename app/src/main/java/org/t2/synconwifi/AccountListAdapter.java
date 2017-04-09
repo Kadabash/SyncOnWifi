@@ -26,6 +26,7 @@ import java.util.List;
 
 
 class AccountListAdapter extends ArrayAdapter<Account> {
+
     private ArrayList<Account> accountList;
     private Context mContext;
 

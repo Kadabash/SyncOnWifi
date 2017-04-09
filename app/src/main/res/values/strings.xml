@@ -6,6 +6,9 @@
     <string name="service_setting_text">Service enabled</string>
     <string name="account_setting_headline">Step 2: Select your accounts</string>
     <string name="account_settings_button_text">Select Accounts</string>
-    <string name="ssid_setting_headline">Step 3: Select your trusted Wifi</string>
+    <string name="ssid_setting_headline">Step 3: Select your trusted WiFi</string>
+    <string name="ssid_settings_button_text">Select WiFi networks</string>
+    <string name="ssid_list_headline">Select the networks in which your accounts should be synchronised automatically:</string>
     <string name="account_image_description"> account of </string>
+    <string name="service_disable_alert_dialogue">You have disabled the service. Please reconfigure the synchronisation settings of your accounts manually. If you plan to re-enable the service, you may ignore this message.</string>
 </resources>

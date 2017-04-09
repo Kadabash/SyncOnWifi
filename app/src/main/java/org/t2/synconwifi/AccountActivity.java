@@ -15,10 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AccountActivity extends AppCompatActivity {
-    public static final int PERMISSION_GRANTED_GET_CONTACTS = 1;
-    public static final int PERMISSION_GRANTED_WRITE_SYNC_SETTIGNS = 2;
-    private AccountListAdapter listAdapter = null;
 
+    public static final int PERMISSION_GRANTED_GET_CONTACTS = 1;
+    private AccountListAdapter listAdapter = null;
     private ListView accountListView;
 
     @Override
@@ -45,7 +44,7 @@ public class AccountActivity extends AppCompatActivity {
         Account[] accounts = accountManager.getAccounts();
         ArrayList<Account> accountArrayList = new ArrayList<>(Arrays.asList(accounts));
 
-        //Set list adapter and add list to layout:
+        //Set list adapter:
         this.listAdapter = new AccountListAdapter(this, R.layout.account_list_item, accountArrayList);
         this.accountListView.setAdapter(listAdapter);
     }

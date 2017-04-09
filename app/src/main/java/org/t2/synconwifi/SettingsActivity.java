@@ -2,12 +2,14 @@ package org.t2.synconwifi;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,11 +44,17 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences("Settings", MODE_PRIVATE);
                 boolean serviceEnabled = sharedPreferencesSettings.getBoolean("ServiceEnabled", false);
                 if(serviceEnabled && !isChecked) {
+                    //Disable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
                     editor.putBoolean("ServiceEnabled", false);
                     editor.apply();
+
+                    //TODO:show this warning in a proper box (e.g. DialogFragment)
+                    //Show warning that user must manually reconfigure sync settings:
+                    Toast.makeText(getApplicationContext(), getString(R.string.service_disable_alert_dialogue), Toast.LENGTH_LONG).show();
                 }
                 if(!serviceEnabled && isChecked) {
+                    //Enable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
                     editor.putBoolean("ServiceEnabled", true);
                     editor.apply();
@@ -64,27 +72,13 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        //Add an input field for Wifi SSID:
-        EditText editTextSSID = (EditText) findViewById(R.id.ssidSettingEditText);
-        SharedPreferences sharedPreferencesSSID = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
-        String ssidFromSharedPreferences = sharedPreferencesSSID.getString("SSID", "");
-        if(!ssidFromSharedPreferences.equals("")) {
-            editTextSSID.setText(ssidFromSharedPreferences);
-        }
-        editTextSSID.setHint("SSID of trusted WIFI network");
-        editTextSSID.addTextChangedListener(new TextWatcher() {
+        //Add button to change to SsidActivity:
+        Button ssidActivityButton = (Button) findViewById(R.id.ssidSettingsButton);
+        ssidActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("TrustedSSID", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("SSID", s.toString());
-                editor.apply();
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SsidActivity.class);
+                startActivity(intent);
             }
         });
     }
