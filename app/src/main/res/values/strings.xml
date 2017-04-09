@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SyncOnWifi</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="account_list_headline">Select the accounts you want the app to control:</string>
+    <string name="service_setting_headline">Step 1: Enable the service</string>
+    <string name="service_setting_text">Service enabled</string>
+    <string name="account_setting_headline">Step 2: Select your accounts</string>
+    <string name="account_settings_button_text">Select Accounts</string>
+    <string name="ssid_setting_headline">Step 3: Select your trusted Wifi</string>
+    <string name="account_image_description"> account of </string>
 </resources>

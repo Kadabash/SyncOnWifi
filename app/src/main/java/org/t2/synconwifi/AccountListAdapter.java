@@ -1,8 +1,15 @@
 package org.t2.synconwifi;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -11,9 +18,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 class AccountListAdapter extends ArrayAdapter<Account> {
@@ -29,6 +38,7 @@ class AccountListAdapter extends ArrayAdapter<Account> {
 
     private class ViewHolder {
         CheckBox checkBox;
+        ImageView imageViewAccountImage;
         TextView textViewAccountType;
         TextView textViewAccountName;
     }
@@ -43,6 +53,7 @@ class AccountListAdapter extends ArrayAdapter<Account> {
 
             holder = new ViewHolder();
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.accountListItemCheckBox);
+            holder.imageViewAccountImage = (ImageView) convertView.findViewById(R.id.accountImageView);
             holder.textViewAccountType = (TextView) convertView.findViewById(R.id.accountListItemTextViewType);
             holder.textViewAccountName = (TextView) convertView.findViewById(R.id.accountListItemTextViewName);
             convertView.setTag(holder);
@@ -77,8 +88,6 @@ class AccountListAdapter extends ArrayAdapter<Account> {
         //Assign account to list item:
         Account account = accountList.get(position);
         holder.checkBox.setTag(account);
-        holder.textViewAccountName.setText(account.name);
-        holder.textViewAccountType.setText(account.type);
         holder.textViewAccountName.setTag(account);
         holder.textViewAccountType.setTag(account);
 
@@ -86,6 +95,36 @@ class AccountListAdapter extends ArrayAdapter<Account> {
         SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
         String accountTypeAndName = account.type + ";" + account.name;     //Accounts are identified in AccountsActive preferences by their type and name, separated by a ";".
         holder.checkBox.setChecked(sharedPreferences.getBoolean(accountTypeAndName, false));
+
+        //Set account icon:
+        Drawable accountIcon = null;
+        PackageManager packageManager = mContext.getApplicationContext().getPackageManager();
+        AccountManager accountManager = AccountManager.get(mContext.getApplicationContext());
+        AuthenticatorDescription[] descriptions = accountManager.getAuthenticatorTypes();
+        for(AuthenticatorDescription description : descriptions) {
+            if(description.type.equals(account.type)) {
+                accountIcon = packageManager.getDrawable(description.packageName, description.iconId, null);
+            }
+        }
+        holder.imageViewAccountImage.setImageDrawable(accountIcon);
+
+        //Set account name and type text:
+        holder.textViewAccountName.setText(account.name);
+        ApplicationInfo applicationInfo = null;
+        try {
+            applicationInfo = packageManager.getApplicationInfo(account.type, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(applicationInfo != null)
+            holder.textViewAccountType.setText(packageManager.getApplicationLabel(applicationInfo));
+        else
+            holder.textViewAccountType.setText(account.type);
+
+        //Add image description for accessibility:
+        holder.imageViewAccountImage.setContentDescription(holder.textViewAccountType.getText()
+                + mContext.getApplicationContext().getString(R.string.account_image_description)
+                + holder.textViewAccountName.getText());
 
         return convertView;
     }
