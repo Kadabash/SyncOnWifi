@@ -43,14 +43,7 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
             for(Account account : accountManager.getAccounts()) {
                 String accountTypeAndName = account.type + ";" + account.name;
                 if(sharedPreferencesActiveAccounts.getBoolean(accountTypeAndName, false)) {
-                    //Determine sync authority for the given account:
-                    SyncAdapterType[] syncAdapterTypes = ContentResolver.getSyncAdapterTypes();
-                    for(SyncAdapterType syncAdapterType : syncAdapterTypes) {
-                        if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
-                            //Actually switch syncing off:
-                            ContentResolver.setSyncAutomatically(account, syncAdapterType.authority, false);
-                        }
-                    }
+                    setSyncAutomatically(account, false);
                 }
             }
         }
@@ -68,17 +61,33 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
                 for(Account account : accountManager.getAccounts()) {
                     String accountTypeAndName = account.type + ";" + account.name;
                     if(sharedPreferencesActiveAccounts.getBoolean(accountTypeAndName, false)) {
-                        //Determine sync authority for the given account:
-                        SyncAdapterType[] syncAdapterTypes = ContentResolver.getSyncAdapterTypes();
-                        for(SyncAdapterType syncAdapterType : syncAdapterTypes) {
-                            if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
-                                //Actually switch syncing on:
-                                ContentResolver.setSyncAutomatically(account, syncAdapterType.authority, true);
-                            }
-                        }
+                        setSyncAutomatically(account, true);
                     }
                 }
             }
         }
+    }
+
+    public static void setSyncAutomatically(Account account, boolean enabled) {
+        //Determine sync authority for the given account:
+        SyncAdapterType[] syncAdapterTypes = ContentResolver.getSyncAdapterTypes();
+        for(SyncAdapterType syncAdapterType : syncAdapterTypes) {
+            if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
+                //Actually switch syncing:
+                ContentResolver.setSyncAutomatically(account, syncAdapterType.authority, enabled);
+            }
+        }
+    }
+
+    public static boolean getSyncAutomatically(Account account) {
+        //Determine sync authority for the given account:
+        SyncAdapterType[] syncAdapterTypes = ContentResolver.getSyncAdapterTypes();
+        for(SyncAdapterType syncAdapterType : syncAdapterTypes) {
+            if(ContentResolver.getIsSyncable(account, syncAdapterType.authority) > 0) {
+                //Actually read sync setting:
+                return ContentResolver.getSyncAutomatically(account, syncAdapterType.authority);
+            }
+        }
+        return false;
     }
 }
