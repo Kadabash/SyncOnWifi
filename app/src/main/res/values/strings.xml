@@ -16,7 +16,7 @@
     <string name="config_restore_alert_dialogue_no_backup_notice">There are no saved synchronisation settings to restore!</string>
     <string name="config_save_alert_dialogue_tag">Save settings</string>
     <string name="config_restore_alert_dialogue_tag">Restore settings</string>
-    <string name="permissions_explanation_dialogue">Please allow the app to access your contacts. This is needed to display a list of your accounts. None of your data will be transmitted to anyone.</string>
+    <string name="permissions_explanation_dialogue">Please allow the app to access your contacts. This is needed to display a list of your accounts. On most devices, you will find the setting in your settings app under "Privacy".</string>
     <string name="permissions_explanation_dialogue_tag">Permission request</string>
     <string name="alert_dialogue_understood">I understand</string>
     <string name="alert_dialogue_yes">Yes</string>
