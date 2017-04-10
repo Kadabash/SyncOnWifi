@@ -1,11 +1,18 @@
 package org.t2.synconwifi;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -31,8 +38,14 @@ public class AccountActivity extends AppCompatActivity {
         //Ask for runtime permissions:
         int permissionCheckGetAccounts = ContextCompat.checkSelfPermission(this, android.Manifest.permission.GET_ACCOUNTS);
         if(permissionCheckGetAccounts != PackageManager.PERMISSION_GRANTED) {
-            //TODO: explain why the permission is needed (as in https://developer.android.com/training/permissions/requesting.html#perm-request)
-            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.GET_ACCOUNTS}, PERMISSION_GRANTED_GET_CONTACTS);
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.GET_ACCOUNTS)) {
+                //Prepare user for allowing runtime permissions:
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                PermissionsExplanationDialogFragment dialogFragment = new PermissionsExplanationDialogFragment();
+                dialogFragment.show(fragmentManager, getString(R.string.permissions_explanation_dialogue_tag));
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.GET_ACCOUNTS}, PERMISSION_GRANTED_GET_CONTACTS);
+            }
         } else {
             setUpListView();
         }
@@ -61,6 +74,23 @@ public class AccountActivity extends AppCompatActivity {
                     Toast.makeText(this, "This app will not function without permission to read accounts. Please open the app again and grant it.", Toast.LENGTH_LONG).show(); //TODO: Internationalise string
                 }
             } break;
+        }
+    }
+
+    public static class PermissionsExplanationDialogFragment extends DialogFragment {
+        @Override @NonNull
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.permissions_explanation_dialogue)
+                    .setPositiveButton(R.string.alert_dialogue_understood, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
+            return builder.create();
         }
     }
 }

@@ -102,7 +102,6 @@ public class SettingsActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.alert_dialogue_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //TODO: save sync settings
                             SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("ConfigBackup", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -148,7 +147,6 @@ public class SettingsActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.alert_dialogue_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //TODO: save sync settings
                             SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("ConfigBackup", MODE_PRIVATE);
 
                             //Show error toast and abort if no backup exists:
