@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SyncOnWifi</string>
+    <string name="account_list_headline">Wählen Sie die Konten aus, die von der App gesteuert werden sollen:</string>
+    <string name="account_setting_headline">Schritt 2: Konten auswählen</string>
+    <string name="account_settings_button_text">Konten auswählen</string>
+    <string name="alert_dialogue_no">Nein</string>
+    <string name="alert_dialogue_understood">Verstanden</string>
+    <string name="alert_dialogue_yes">Ja</string>
+    <string name="config_restore_alert_dialogue">Möchten Sie Ihre Synchronisierungseinstellungen wiederherstellen?</string>
+    <string name="config_restore_alert_dialogue_no_backup_notice">Es sind keine früheren Synchronisierungseinstellungen gespeichert, die wiederhergestellt werden könnten!</string>
+    <string name="config_restore_alert_dialogue_tag">Einstellungen wiederherstellen</string>
+    <string name="config_save_alert_dialogue">Möchten Sie Ihre jetzigen Synchronisierungseinstellungen speichern, damit diese später wiederhergestellt werden können?</string>
+    <string name="config_save_alert_dialogue_overwrite_notice">Früher gespeicherte Synchronisierungseinstellungen werden überschrieben!</string>
+    <string name="config_save_alert_dialogue_tag">Einstellungen speichern</string>
+    <string name="permissions_explanation_dialogue">Bitte gestatten Sie der App, auf Ihre Kontakte zuzugreifen. Dies wird zum Anzeigen der Liste Ihrer Accounts benötigt. Auf den meisten Geräten finden Sie diese Einstellung in der Einstellungs-App unter \"Datenschutz\".</string>
+    <string name="permissions_explanation_dialogue_tag">Berechtigungen anfordern</string>
+    <string name="service_setting_headline">Schritt 1: Service aktivieren</string>
+    <string name="service_setting_text">Service aktiviert</string>
+    <string name="ssid_list_headline">Wählen Sie die Netzwerke aus, in denen Ihre Konten automatisch synchronisiert werden sollen:</string>
+    <string name="ssid_setting_headline">Schritt 3: Vertrauenswürdige WLAN-Netzwerke auswählen:</string>
+    <string name="ssid_settings_button_text">WLAN-Netzwerke auswählen</string>
+    <string name="title_activity_settings">Einstellungen</string>
+</resources>
