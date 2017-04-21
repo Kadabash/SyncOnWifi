@@ -28,6 +28,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="@string/service_setting_headline" />
 
             <LinearLayout
@@ -69,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
                 android:text="@string/account_setting_headline" />
 
             <Button
@@ -92,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
                 android:text="@string/ssid_setting_headline" />
 
             <Button
