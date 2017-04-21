@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">SyncOnWifi</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="account_list_headline">アプリをコントロールしたいアカウントを選択:</string>
+    <string name="account_image_description">" アカウント "</string>
+    <string name="service_setting_headline">ステップ 1: サービスを有効にする</string>
+    <string name="service_setting_text">サービスを有効にしました</string>
+    <string name="account_setting_headline">ステップ 2: アカウントを選択</string>
+    <string name="account_settings_button_text">アカウントを選択</string>
+    <string name="ssid_setting_headline">WiFi ネットワークを選択</string>
+    <string name="ssid_settings_button_text">WiFi ネットワークを選択</string>
+    <string name="ssid_list_headline">どのネットワークで自動的にアカウントを同期するかを選択:</string>
+    <string name="config_save_alert_dialogue">後で復元できるように、現在の同期設定を保存しますか?</string>
+    <string name="config_save_alert_dialogue_overwrite_notice">以前のバックアップは上書きされます!</string>
+    <string name="config_restore_alert_dialogue">同期設定を復元しますか?</string>
+    <string name="config_restore_alert_dialogue_no_backup_notice">復元するための同期設定は保存されていません!</string>
+    <string name="config_save_alert_dialogue_tag">設定を保存</string>
+    <string name="config_restore_alert_dialogue_tag">設定を復元</string>
+    <string name="permissions_explanation_dialogue">連絡先へのアクセスを許可してください。 これは、アカウントのリストを表示するために必要です。 ほとんどのデバイスで、"プライバシー" 設定の下で設定することができます。</string>
+    <string name="permissions_explanation_dialogue_tag">アクセス許可の要求</string>
+    <string name="alert_dialogue_understood">了解しました</string>
+    <string name="alert_dialogue_yes">はい</string>
+    <string name="alert_dialogue_no">いいえ</string>
+</resources>
