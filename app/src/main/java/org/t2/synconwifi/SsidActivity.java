@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,14 @@ public class SsidActivity extends AppCompatActivity {
     private void setUpListView() {
         //Get WiFi networks:
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        //Check if WiFi is off, since WifiManager is not available when it is disabled:
+        if(!(manager.getWifiState() == WifiManager.WIFI_STATE_ENABLING || manager.getWifiState() == WifiManager.WIFI_STATE_ENABLED))
+        {
+            Toast.makeText(getApplicationContext(), getString(R.string.alert_wifi_is_disabled), Toast.LENGTH_LONG).show();
+            //Return to main activity:
+            this.finish();
+            return;
+        }
         ArrayList<WifiConfiguration> configurations = new ArrayList<>();
         configurations.addAll(manager.getConfiguredNetworks());
 
