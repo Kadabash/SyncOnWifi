@@ -21,5 +21,5 @@
     <string name="alert_dialogue_understood">了解しました</string>
     <string name="alert_dialogue_yes">はい</string>
     <string name="alert_dialogue_no">いいえ</string>
-    <string name="alert_wifi_is_disabled">WiFi is turned off. Enable it to select your networks.</string>
+    <string name="alert_wifi_is_disabled">WiFi はオフです。 有効にして、ネットワークを選択してください。</string>
 </resources>
