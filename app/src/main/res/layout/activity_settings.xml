@@ -15,9 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="top"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp">
+            android:layout_gravity="top">
 
             <LinearLayout
                 android:layout_marginTop="8dp"
@@ -126,7 +124,7 @@
 
                 <Button
                     android:id="@+id/timeSettingsButton"
-                    android:text="@string/ssid_settings_button_text"
+                    android:text="@string/time_settings_button_text"
                     android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

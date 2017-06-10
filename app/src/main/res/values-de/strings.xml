@@ -25,4 +25,8 @@
     <string name="account_image_description">" Konto von "</string>
     <string name="alert_wifi_is_disabled">WLAN ist ausgeschaltet. Zum Auswählen der Konten bitte WLAN aktivieren.</string>
     <string name="time_settings_button_text">Zeit einstellen</string>
+    <string name="time_activity_headline">Wählen Sie den Beginn und das Ende der Zeitspanne, in der die Synchronisation aktiviert werden soll. Betrifft nur Konten, die vorher ausgewählt wurden.</string>
+    <string name="time_start_headline">Beginn</string>
+    <string name="time_end_headline">Ende</string>
+    <string name="time_consistency_error">Endzeit früher als Startzeit! Bitte erneut versuchen.</string>
 </resources>

@@ -5,5 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.t2.synconwifi.TimeActivity">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/timeSelectionTextView"
+                android:text="@string/time_activity_headline"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" >
+                <TextView
+                    android:id="@+id/timeStartHeadline"
+                    android:text="@string/time_start_headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/timeStartSpinnerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="center"
+                    style="?android:attr/spinnerStyle"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" >
+                <TextView
+                    android:id="@+id/timeEndHeadline"
+                    android:text="@string/time_end_headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/timeEndSpinnerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="test"
+                    android:textAlignment="center"
+                    style="?android:attr/spinnerStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
