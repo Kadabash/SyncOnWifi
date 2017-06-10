@@ -5,105 +5,133 @@
     android:layout_height="match_parent"
     tools:context="org.t2.synconwifi.SettingsActivity">
 
-    <LinearLayout
-        android:showDividers="middle"
-        android:divider="@color/colorPrimaryDark"
-        android:dividerPadding="15dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="top"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp">
-
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="8dp"
-            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark"
+            android:dividerPadding="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/serviceSettingHeadlineTextView"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="@string/service_setting_headline" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal" >
-
-                <CheckBox
-                    android:id="@+id/serviceSettingCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent" />
-
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/serviceSettingTextView"
+                    android:id="@+id/serviceSettingHeadlineTextView"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/service_setting_text"
-                    android:textSize="18sp"/>
+                    android:textAlignment="center"
+                    android:text="@string/service_setting_headline" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/serviceSettingCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/serviceSettingTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/service_setting_text"
+                        android:textSize="18sp"/>
 
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp">
+                <TextView
+                    android:id="@+id/accountSettingHeadlineTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:text="@string/account_setting_headline" />
+
+                <Button
+                    android:id="@+id/accountSettingsButton"
+                    android:text="@string/account_settings_button_text"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp" >
+                <TextView
+                    android:id="@+id/ssidSettingHeadlineTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:text="@string/ssid_setting_headline" />
+
+                <Button
+                    android:id="@+id/ssidSettingsButton"
+                    android:text="@string/ssid_settings_button_text"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp">
+                <TextView
+                    android:id="@+id/timeSettingHeadlineTextView"
+                    android:text="@string/time_setting_headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"/>
+
+                <Button
+                    android:id="@+id/timeSettingsButton"
+                    android:text="@string/ssid_settings_button_text"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="8dp">
-            <TextView
-                android:id="@+id/accountSettingHeadlineTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="center"
-                android:text="@string/account_setting_headline" />
-
-            <Button
-                android:id="@+id/accountSettingsButton"
-                android:text="@string/account_settings_button_text"
-                android:textSize="15sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="8dp" >
-            <TextView
-                android:id="@+id/ssidSettingHeadlineTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="center"
-                android:text="@string/ssid_setting_headline" />
-
-            <Button
-                android:id="@+id/ssidSettingsButton"
-                android:text="@string/ssid_settings_button_text"
-                android:textSize="15sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

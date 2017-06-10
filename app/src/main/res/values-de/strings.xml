@@ -20,7 +20,9 @@
     <string name="ssid_list_headline">Wählen Sie die Netzwerke aus, in denen Ihre Konten automatisch synchronisiert werden sollen:</string>
     <string name="ssid_setting_headline">Schritt 3: Vertrauenswürdige WLAN-Netzwerke auswählen:</string>
     <string name="ssid_settings_button_text">WLAN-Netzwerke auswählen</string>
+    <string name="time_setting_headline">(Optional:) Wählen Sie einen Zeitraum, in dem synchronisiert werden soll:</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="account_image_description">" Konto von "</string>
     <string name="alert_wifi_is_disabled">WLAN ist ausgeschaltet. Zum Auswählen der Konten bitte WLAN aktivieren.</string>
+    <string name="time_settings_button_text">Zeit einstellen</string>
 </resources>

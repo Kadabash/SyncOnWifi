@@ -91,6 +91,16 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Add button to change to TimeActivity:
+        Button timeActivityButton = (Button) findViewById(R.id.timeSettingsButton);
+        timeActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TimeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //Copied from https://developer.android.com/guide/topics/ui/dialogs.html

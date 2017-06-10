@@ -7,7 +7,7 @@
     <string name="service_setting_text">Service enabled</string>
     <string name="account_setting_headline">Step 2: Select your accounts</string>
     <string name="account_settings_button_text">Select Accounts</string>
-    <string name="ssid_setting_headline">Select WiFi networks</string>
+    <string name="ssid_setting_headline">Step 3: Select WiFi networks</string>
     <string name="ssid_settings_button_text">Select WiFi networks</string>
     <string name="ssid_list_headline">Select the networks in which your accounts should be synchronised automatically:</string>
     <string name="config_save_alert_dialogue">Would you like to save your current synchronisation settings, so they can be restored later?</string>
@@ -22,4 +22,6 @@
     <string name="alert_dialogue_yes">Yes</string>
     <string name="alert_dialogue_no">No</string>
     <string name="alert_wifi_is_disabled">WiFi is turned off. Enable it to select your networks.</string>
+    <string name="time_setting_headline">(Optional:) Choose a time interval in which synchronisation should be enabled:</string>
+    <string name="time_settings_button_text">Set time</string>
 </resources>
