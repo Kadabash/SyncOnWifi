@@ -25,8 +25,8 @@
     <string name="time_setting_headline">(Optional:) Choose a time interval in which synchronisation should be enabled:</string>
     <string name="time_settings_button_text">Set time</string>
     <string name="time_activity_headline">Select a time when to enable synchronisation, and a time when to disable it. Only affects accounts that have been selected previously.</string>
-    <string name="time_enable_textview_hint">Enable at:</string>
     <string name="time_start_headline">Start</string>
     <string name="time_end_headline">End</string>
     <string name="time_consistency_error">End time earlier than start time! Please try again.</string>
+    <string name="time_enable_check_text">Enable time-based control</string>
 </resources>

@@ -2,14 +2,22 @@ package org.t2.synconwifi;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimeActivity extends AppCompatActivity {
 
@@ -49,6 +57,39 @@ public class TimeActivity extends AppCompatActivity {
             }
         });
 
+        // Get time control enable state and display/hide rest of the views in this acitivity:
+        boolean timeControlEnabled = timePreferences.getBoolean("timeControlEnabled", false);
+        CheckBox timeControlEnabledCheckBox = (CheckBox) findViewById(R.id.timeEnabledCheckBox);
+        timeControlEnabledCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Save new check state:
+                SharedPreferences shp = getApplicationContext().getSharedPreferences("timePreferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = shp.edit();
+                editor.putBoolean("timeControlEnabled", isChecked);
+
+                // Show/hide other views in this activity based on check state:
+                toggleVisibilityTimeSettings(isChecked);
+            }
+        });
+        timeControlEnabledCheckBox.setChecked(timeControlEnabled);
+
+        // If time-based control is disabled, hide other Views on activity start:
+        toggleVisibilityTimeSettings(timePreferences.getBoolean("timeControlEnabled", false));
+
+    }
+
+    // Show/hide other views in this acitivity based on enabled state of time-based control:
+    public void toggleVisibilityTimeSettings(boolean enabled) {
+        List<View> viewsList = new ArrayList<>();
+        viewsList.add((TextView) findViewById(R.id.timeSelectionTextView));
+        viewsList.add((Button) findViewById(R.id.timeStartSpinnerButton));
+        viewsList.add((Button) findViewById(R.id.timeEndSpinnerButton));
+        viewsList.add((TextView) findViewById(R.id.timeStartHeadline));
+        viewsList.add((TextView) findViewById(R.id.timeEndHeadline));
+        for(View v : viewsList) {
+            v.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     // Make start time picker class:

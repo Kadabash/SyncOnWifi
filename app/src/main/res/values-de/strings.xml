@@ -29,4 +29,5 @@
     <string name="time_start_headline">Beginn</string>
     <string name="time_end_headline">Ende</string>
     <string name="time_consistency_error">Endzeit früher als Startzeit! Bitte erneut versuchen.</string>
+    <string name="time_enable_check_text">Zeitsteuerung aktivieren</string>
 </resources>
