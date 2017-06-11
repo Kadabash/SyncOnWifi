@@ -1,5 +1,7 @@
 package org.t2.synconwifi;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -7,6 +9,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,6 +31,7 @@ import java.util.List;
 
 public class TimeActivity extends AppCompatActivity {
 
+    // Random IDs for alarm intents:
     public final int startTimePendingIntentID = 450893;
     public final int endTimePendingIntentID = 234785;
 
@@ -101,9 +107,27 @@ public class TimeActivity extends AppCompatActivity {
         });
         timeControlEnabledCheckBox.setChecked(timeControlEnabled);
 
+        // Set up radio group for inactive time settings:
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.inactiveTimeRadioGroup);
+        final int inactivitySetting = timePreferences.getInt("inactivitySetting", 0);
+        radioGroup.check(inactivitySetting);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                // Set inactivitySetting in timePreferences according to checked item:
+                SharedPreferences timePreferences = getApplicationContext().getSharedPreferences("timePreferences", MODE_PRIVATE);
+                SharedPreferences.Editor timePrefsEditor = timePreferences.edit();
+                CheckBox checkedItem = (CheckBox) findViewById(checkedId);
+                int checkBoxTag = Integer.parseInt((String) checkedItem.getTag());
+                timePrefsEditor.putInt("inactivitySetting", checkBoxTag);
+                timePrefsEditor.apply();
+            }
+        });
+
         // If time-based control is disabled, hide other Views on activity start:
         toggleVisibilityTimeSettings(timePreferences.getBoolean("timeControlEnabled", false));
     }
+
 
     // Show/hide other views in this acitivity based on enabled state of time-based control:
     protected void toggleVisibilityTimeSettings(boolean enabled) {
@@ -113,6 +137,8 @@ public class TimeActivity extends AppCompatActivity {
         viewsList.add((Button) findViewById(R.id.timeEndSpinnerButton));
         viewsList.add((TextView) findViewById(R.id.timeStartHeadline));
         viewsList.add((TextView) findViewById(R.id.timeEndHeadline));
+        viewsList.add((TextView) findViewById(R.id.inactiveTimeHeader));
+        viewsList.add((RadioGroup) findViewById(R.id.inactiveTimeRadioGroup));
         for(View v : viewsList) {
             v.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         }

@@ -51,7 +51,10 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp" >
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp" >
                 <TextView
                     android:id="@+id/timeStartHeadline"
                     android:text="@string/time_start_headline"
@@ -69,7 +72,10 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp" >
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp">
                 <TextView
                     android:id="@+id/timeEndHeadline"
                     android:text="@string/time_end_headline"
@@ -82,6 +88,47 @@
                     android:text="test"
                     android:textAlignment="center"
                     style="?android:attr/spinnerStyle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp">
+                <TextView
+                    android:id="@+id/inactiveTimeHeader"
+                    android:text="@string/time_inactive_time_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <android.support.v4.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="6dp" />
+                <RadioGroup
+                    android:id="@+id/inactiveTimeRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/inactiveTimeEnabledRadioButton"
+                        android:text="@string/time_inactive_enabled_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="0"/>
+                    <RadioButton
+                        android:id="@+id/inactiveTimeDisabledRadioButton"
+                        android:text="@string/time_inactive_disabled_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="1"/>
+                    <RadioButton
+                        android:id="@+id/inactiveTimeNoswitchRadioButton"
+                        android:text="@string/time_inactive_noswitch_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="2"/>
+                </RadioGroup>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

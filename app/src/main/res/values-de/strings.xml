@@ -30,4 +30,8 @@
     <string name="time_end_headline">Ende</string>
     <string name="time_consistency_error">Endzeit früher als Startzeit! Bitte erneut versuchen.</string>
     <string name="time_enable_check_text">Zeitsteuerung aktivieren</string>
+    <string name="time_inactive_time_header">In der Zeit zwischen Beginn und Ende:</string>
+    <string name="time_inactive_enabled_radio">Synchronisation für gewählte Konten aktivieren</string>
+    <string name="time_inactive_disabled_radio">Synchronisation für gewählte Konten deaktivieren</string>
+    <string name="time_inactive_noswitch_radio">Nur Steuerung durch diese App deaktivieren</string>
 </resources>

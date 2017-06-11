@@ -29,4 +29,8 @@
     <string name="time_end_headline">End</string>
     <string name="time_consistency_error">End time earlier than start time! Please try again.</string>
     <string name="time_enable_check_text">Enable time-based control</string>
+    <string name="time_inactive_time_header">In the time between End and Start:</string>
+    <string name="time_inactive_enabled_radio">Enable synchronisation for selected accounts</string>
+    <string name="time_inactive_noswitch_radio">Just stop control by this App</string>
+    <string name="time_inactive_disabled_radio">Disable synchronisation for selected accounts</string>
 </resources>
