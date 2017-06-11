@@ -6,6 +6,7 @@ The following permission are required:
 * **WiFi / network status** to react to WiFi network connecting / disconnecting.
 * **Contacts / Accounts access** to read which accounts there are on your device. *NO* contact data is accessed.
 * **Read / Write synchronisation settings** to allow automatic synchronisation switching.
+* **Start at boot** to register time triggers with the system if time-based control is enabled.
 
 Your personal information is kept entirely private. Nothing is transmitted to anyone in any way. If you don't trust me on that (and you shouldn't), feel free to check the source code yourself.
 
