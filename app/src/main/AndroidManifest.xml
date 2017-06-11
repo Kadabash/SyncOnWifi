@@ -22,6 +22,9 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".TimeAlarmReceiver"
+            android:enabled="true">
+        </receiver>
 
         <activity android:name=".SettingsActivity">
             <intent-filter>
