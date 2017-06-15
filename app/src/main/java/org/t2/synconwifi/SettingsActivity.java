@@ -38,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //Add checkbox to disable app functionality:
+        // Add checkbox to disable app functionality:
         CheckBox serviceCheckBox = (CheckBox) findViewById(R.id.serviceSettingCheckBox);
         SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences(Preferences.Settings._NAME_, MODE_PRIVATE);
         serviceCheckBox.setChecked(sharedPreferencesSettings.getBoolean(Preferences.Settings.SERVICE_ENABLED, false));
@@ -48,23 +48,23 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences(Preferences.Settings._NAME_, MODE_PRIVATE);
                 boolean serviceEnabled = sharedPreferencesSettings.getBoolean(Preferences.Settings.SERVICE_ENABLED, false);
                 if(serviceEnabled && !isChecked) {
-                    //Disable service:
+                    // Disable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
                     editor.putBoolean(Preferences.Settings.SERVICE_ENABLED, false);
                     editor.apply();
 
-                    //Prompt user to save sync settings:
+                    // Prompt user to save sync settings:
                     ConfigRestoreDialogFragment configRestoreDialog = new ConfigRestoreDialogFragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     configRestoreDialog.show(fragmentManager, getString(R.string.config_restore_alert_dialogue_tag));
                 }
                 if(!serviceEnabled && isChecked) {
-                    //Enable service:
+                    // Enable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
                     editor.putBoolean(Preferences.Settings.SERVICE_ENABLED, true);
                     editor.apply();
 
-                    //Prompt user to save sync settings:
+                    // Prompt user to save sync settings:
                     ConfigSaveDialogFragment configSaveDialog = new ConfigSaveDialogFragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     configSaveDialog.show(fragmentManager, getString(R.string.config_save_alert_dialogue_tag));
@@ -72,7 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        //Add button to change to AccountActivity:
+        // Add button to change to AccountActivity:
         Button accountActivityButton = (Button) findViewById(R.id.accountSettingsButton);
         accountActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        //Add button to change to SsidActivity:
+        // Add button to change to SsidActivity:
         Button ssidActivityButton = (Button) findViewById(R.id.ssidSettingsButton);
         ssidActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +91,19 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Add button to change to TimeControlActivity:
+        Button timeActivityButton = (Button) findViewById(R.id.timeSettingsButton);
+        timeActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TimeControlActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    //Copied from https://developer.android.com/guide/topics/ui/dialogs.html
+    // Copied from https://developer.android.com/guide/topics/ui/dialogs.html
     public static class ConfigSaveDialogFragment extends DialogFragment {
         @Override @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {

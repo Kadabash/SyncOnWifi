@@ -22,4 +22,6 @@
     <string name="alert_dialogue_yes">Yes</string>
     <string name="alert_dialogue_no">No</string>
     <string name="alert_wifi_is_disabled">WiFi is turned off. Enable it to select your networks.</string>
+    <string name="time_setting_headline">(Optional) Choose at which time every account should begin and stop synchonising</string>
+    <string name="time_settings_button_text">Select time</string>
 </resources>

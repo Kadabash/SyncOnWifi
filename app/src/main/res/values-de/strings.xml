@@ -23,4 +23,6 @@
     <string name="title_activity_settings">Einstellungen</string>
     <string name="account_image_description">" Konto von "</string>
     <string name="alert_wifi_is_disabled">WLAN ist ausgeschaltet. Zum Auswählen der Konten bitte WLAN aktivieren.</string>
+    <string name="time_setting_headline">(Optional) Wählen Sie aus, zu welcher Zeit jedes Konto die Synchronisation beginnen und anhalten soll</string>
+    <string name="time_settings_button_text">Zeit auswählen</string>
 </resources>
