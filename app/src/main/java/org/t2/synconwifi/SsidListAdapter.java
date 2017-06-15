@@ -49,7 +49,7 @@ public class SsidListAdapter extends ArrayAdapter<WifiConfiguration> {
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("TrustedSSID", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences(Preferences.TrustedSSID._NAME_, Context.MODE_PRIVATE);
                     String assignedSsid = (String) buttonView.getTag();
                     boolean wifiIsEnabled = sharedPreferences.getBoolean(assignedSsid, false);
                     if(isChecked) {
@@ -81,7 +81,7 @@ public class SsidListAdapter extends ArrayAdapter<WifiConfiguration> {
         holder.checkBox.setTag(wifiSsid);
 
         //Set CheckBox to correct state:
-        SharedPreferences sharedPreferencesSsid = mContext.getApplicationContext().getSharedPreferences("TrustedSSID", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesSsid = mContext.getApplicationContext().getSharedPreferences(Preferences.TrustedSSID._NAME_, Context.MODE_PRIVATE);
         holder.checkBox.setChecked(sharedPreferencesSsid.getBoolean(wifiSsid, false));
 
         return convertView;

@@ -24,8 +24,8 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //Check if service is activated:
-        SharedPreferences sharedPreferencesSettings = context.getApplicationContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        if(!sharedPreferencesSettings.getBoolean("ServiceEnabled", false)) {
+        SharedPreferences sharedPreferencesSettings = context.getApplicationContext().getSharedPreferences(Preferences.Settings._NAME_, Context.MODE_PRIVATE);
+        if(!sharedPreferencesSettings.getBoolean(Preferences.Settings.SERVICE_ENABLED, false)) {
             return;
         }
 
@@ -35,7 +35,7 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         AccountManager accountManager = AccountManager.get(context.getApplicationContext());
-        SharedPreferences sharedPreferencesActiveAccounts = context.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesActiveAccounts = context.getApplicationContext().getSharedPreferences(Preferences.AccountsActive._NAME_, Context.MODE_PRIVATE);
 
         //If we are disconnected/disconnecting from any network, disable account synchronisation:
         if((wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) || (wifiManager.getWifiState() ==  WifiManager.WIFI_STATE_DISABLING)) {
@@ -49,7 +49,7 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         }
 
         NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        SharedPreferences sharedPreferencesSSID = context.getApplicationContext().getSharedPreferences("TrustedSSID", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesSSID = context.getApplicationContext().getSharedPreferences(Preferences.TrustedSSID._NAME_, Context.MODE_PRIVATE);
 
         //If we are connected to a trusted network, enable account synchronisation:
         if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION) && networkInfo.isConnected()) {

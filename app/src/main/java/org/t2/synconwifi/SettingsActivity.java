@@ -40,17 +40,17 @@ public class SettingsActivity extends AppCompatActivity {
 
         //Add checkbox to disable app functionality:
         CheckBox serviceCheckBox = (CheckBox) findViewById(R.id.serviceSettingCheckBox);
-        SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences("Settings", MODE_PRIVATE);
-        serviceCheckBox.setChecked(sharedPreferencesSettings.getBoolean("ServiceEnabled", false));
+        SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences(Preferences.Settings._NAME_, MODE_PRIVATE);
+        serviceCheckBox.setChecked(sharedPreferencesSettings.getBoolean(Preferences.Settings.SERVICE_ENABLED, false));
         serviceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences("Settings", MODE_PRIVATE);
-                boolean serviceEnabled = sharedPreferencesSettings.getBoolean("ServiceEnabled", false);
+                SharedPreferences sharedPreferencesSettings = getApplicationContext().getSharedPreferences(Preferences.Settings._NAME_, MODE_PRIVATE);
+                boolean serviceEnabled = sharedPreferencesSettings.getBoolean(Preferences.Settings.SERVICE_ENABLED, false);
                 if(serviceEnabled && !isChecked) {
                     //Disable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
-                    editor.putBoolean("ServiceEnabled", false);
+                    editor.putBoolean(Preferences.Settings.SERVICE_ENABLED, false);
                     editor.apply();
 
                     //Prompt user to save sync settings:
@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!serviceEnabled && isChecked) {
                     //Enable service:
                     SharedPreferences.Editor editor = sharedPreferencesSettings.edit();
-                    editor.putBoolean("ServiceEnabled", true);
+                    editor.putBoolean(Preferences.Settings.SERVICE_ENABLED, true);
                     editor.apply();
 
                     //Prompt user to save sync settings:
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.alert_dialogue_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("ConfigBackup", MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(Preferences.ConfigBackup._NAME_, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
                             //Put an entry into "ConfigBackup" for each account:
@@ -114,7 +114,7 @@ public class SettingsActivity extends AppCompatActivity {
                             }
 
                             //Save that a backup exists:
-                            editor.putBoolean("BackupExists", true);
+                            editor.putBoolean(Preferences.ConfigBackup.BACKUP_EXISTS, true);
 
                             editor.apply();
 
@@ -129,8 +129,8 @@ public class SettingsActivity extends AppCompatActivity {
                     });
 
             //If a previous backup exists, show overwrite notice:
-            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("ConfigBackup", MODE_PRIVATE);
-            if(sharedPreferences.getBoolean("BackupExists", false)) {
+            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(Preferences.ConfigBackup._NAME_, MODE_PRIVATE);
+            if(sharedPreferences.getBoolean(Preferences.ConfigBackup.BACKUP_EXISTS, false)) {
                 builder.setMessage(getString(R.string.config_save_alert_dialogue) + "\n" + getString(R.string.config_save_alert_dialogue_overwrite_notice));
             }
 
@@ -147,10 +147,10 @@ public class SettingsActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.alert_dialogue_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("ConfigBackup", MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(Preferences.ConfigBackup._NAME_, MODE_PRIVATE);
 
                             //Show error toast and abort if no backup exists:
-                            if(!sharedPreferences.getBoolean("BackupExists", false)) {
+                            if(!sharedPreferences.getBoolean(Preferences.ConfigBackup.BACKUP_EXISTS, false)) {
                                 Toast.makeText(getActivity().getApplicationContext(), getString(R.string.config_restore_alert_dialogue_no_backup_notice), Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
                                 return;

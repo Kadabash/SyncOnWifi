@@ -62,7 +62,7 @@ class AccountListAdapter extends ArrayAdapter<Account> {
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences(Preferences.AccountsActive._NAME_, Context.MODE_PRIVATE);
                     Account associatedAccount = (Account) buttonView.getTag();
                     String accountTypeAndName = associatedAccount.type + ";" + associatedAccount.name;     //Accounts are identified in AccountsActive preferences by their type and name, separated by a ";".
                     boolean isActiveAccount = sharedPreferences.getBoolean(accountTypeAndName, false);
@@ -93,7 +93,7 @@ class AccountListAdapter extends ArrayAdapter<Account> {
         holder.textViewAccountType.setTag(account);
 
         //Set checked state from shared preferences:
-        SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getApplicationContext().getSharedPreferences(Preferences.AccountsActive._NAME_, Context.MODE_PRIVATE);
         String accountTypeAndName = account.type + ";" + account.name;     //Accounts are identified in AccountsActive preferences by their type and name, separated by a ";".
         holder.checkBox.setChecked(sharedPreferences.getBoolean(accountTypeAndName, false));
 
