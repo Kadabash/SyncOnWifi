@@ -22,6 +22,10 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".TimeAlarmReceiver"
+            android:enabled="true">
+        </receiver>
 
         <activity android:name=".SettingsActivity">
             <intent-filter>
@@ -51,7 +55,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
         </activity>
-        <activity android:name=".TimeAccountDetailActivity"></activity>
+        <activity
+            android:name=".TimeAccountDetailActivity"
+            android:parentActivityName=".TimeControlActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TimeControlActivity" />
+        </activity>
     </application>
 
 </manifest>

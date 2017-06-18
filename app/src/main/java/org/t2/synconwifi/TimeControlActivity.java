@@ -3,6 +3,7 @@ package org.t2.synconwifi;
 import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -44,6 +47,18 @@ public class TimeControlActivity extends AppCompatActivity {
         } else {
             setUpListView();
         }
+
+        // Open detail activity on list item click:
+        this.accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), TimeAccountDetailActivity.class);
+                Account tagAccount = (Account) ((TimeAccountListAdapter.ViewHolder)view.getTag()).textViewAccountName.getTag();
+                final String accountIdentifier = tagAccount.type + ";" + tagAccount.name;
+                intent.putExtra(TimeAccountDetailActivity.ACCOUNT_EXTRA_NAME, accountIdentifier);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpListView() {

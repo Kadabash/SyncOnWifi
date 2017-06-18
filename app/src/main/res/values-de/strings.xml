@@ -25,4 +25,9 @@
     <string name="alert_wifi_is_disabled">WLAN ist ausgeschaltet. Zum Auswählen der Konten bitte WLAN aktivieren.</string>
     <string name="time_setting_headline">(Optional) Wählen Sie aus, zu welcher Zeit jedes Konto die Synchronisation beginnen und anhalten soll</string>
     <string name="time_settings_button_text">Zeit auswählen</string>
+    <string name="time_start_headline">Beginn</string>
+    <string name="time_end_headline">Ende</string>
+    <string name="time_consistency_error">Endzeit ist vor Beginn. Bitte nochmal versuchen</string>
+    <string name="time_remove_button">Zeitsteuerung deaktivieren</string>
+    <string name="time_set_start_without_end">Startzeitpunkt gespeichert. Bitte jetzt den Endzeitpunkt wählen</string>
 </resources>

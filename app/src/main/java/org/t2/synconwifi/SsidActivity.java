@@ -1,15 +1,13 @@
 package org.t2.synconwifi;
 
-import android.accounts.AccountManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SsidActivity extends AppCompatActivity {
 

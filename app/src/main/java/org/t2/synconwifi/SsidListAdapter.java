@@ -12,14 +12,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class SsidListAdapter extends ArrayAdapter<WifiConfiguration> {
+class SsidListAdapter extends ArrayAdapter<WifiConfiguration> {
 
-    private ArrayList<WifiConfiguration> wifiConfigurationList;
-    private Context mContext;
+    private final ArrayList<WifiConfiguration> wifiConfigurationList;
+    private final Context mContext;
 
     SsidListAdapter(Context context, int textViewId, ArrayList<WifiConfiguration> wifiConfigurationList) {
         super(context, textViewId, wifiConfigurationList);

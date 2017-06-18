@@ -24,4 +24,9 @@
     <string name="alert_wifi_is_disabled">WiFi is turned off. Enable it to select your networks.</string>
     <string name="time_setting_headline">(Optional) Choose at which time every account should begin and stop synchonising</string>
     <string name="time_settings_button_text">Select time</string>
+    <string name="time_start_headline">Start</string>
+    <string name="time_end_headline">End</string>
+    <string name="time_consistency_error">End time is before start time. Please try again</string>
+    <string name="time_remove_button">Disable time control</string>
+    <string name="time_set_start_without_end">Start time saved. Please set end time next</string>
 </resources>

@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TimeAccountListAdapter extends ArrayAdapter<Account> {
+class TimeAccountListAdapter extends ArrayAdapter<Account> {
 
-    private ArrayList<Account> accountList;
-    private Context mContext;
+    private final ArrayList<Account> accountList;
+    private final Context mContext;
 
     TimeAccountListAdapter(Context context, int textViewId, ArrayList<Account> accountList) {
         super(context, textViewId, accountList);
@@ -29,7 +29,7 @@ public class TimeAccountListAdapter extends ArrayAdapter<Account> {
         this.accountList.addAll(accountList);
     }
 
-    private class ViewHolder {
+    public class ViewHolder {
         ImageView imageViewAccountImage;
         TextView textViewAccountType;
         TextView textViewAccountName;

@@ -6,12 +6,9 @@ import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.annotation.NonNull;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 class AccountListAdapter extends ArrayAdapter<Account> {
 
-    private ArrayList<Account> accountList;
-    private Context mContext;
+    final private ArrayList<Account> accountList;
+    final private Context mContext;
 
     AccountListAdapter(Context context, int textViewId, ArrayList<Account> accountList) {
         super(context, textViewId, accountList);
