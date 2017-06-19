@@ -6,6 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 public class TimeAlarmReceiver extends BroadcastReceiver {
@@ -20,6 +23,8 @@ public class TimeAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
+
+        //TODO: Re-set alarms on boot
 
         // Get data intent extras:
         this.targetState = intent.getBooleanExtra(EXTRA_TARGET_STATE, false);
@@ -52,7 +57,16 @@ public class TimeAlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-        // TODO: Integrate with wifi control, i.e. perform network checks as in WifiStateChangeReceiver
+        // Obtain network information:
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        String ssid = wifiInfo.getSSID();
+        ssid = ssid.substring(1, ssid.length() - 1);
+        SharedPreferences ssidPreferences = context.getApplicationContext().getSharedPreferences(Preferences.TrustedSSID._NAME_, Context.MODE_PRIVATE);
+        // If targetState is "sync enabled", then check whether trusted SSID is connected:
+        if(targetState && !(ssidPreferences.getBoolean(ssid, false))) {
+            return;
+        }
 
         // Get accounts and toggle synchronisation:
         AccountManager accountManager = AccountManager.get(context.getApplicationContext());

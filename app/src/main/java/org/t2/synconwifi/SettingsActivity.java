@@ -20,6 +20,10 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    //TODO: Add credits, licence
+
+    //TODO: On first app start, display warning notice
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
