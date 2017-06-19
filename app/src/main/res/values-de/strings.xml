@@ -30,4 +30,7 @@
     <string name="time_consistency_error">Endzeit ist vor Beginn. Bitte nochmal versuchen</string>
     <string name="time_remove_button">Zeitsteuerung deaktivieren</string>
     <string name="time_set_start_without_end">Startzeitpunkt gespeichert. Bitte jetzt den Endzeitpunkt wählen</string>
+    <string name="time_detail_headline">Zeitspanne wählen, in der Synchronisation erlaubt sein soll.</string>
+    <string name="time_control_headline">Konto zur Zeitsteuerung antippen</string>
+    <string name="time_nothing_set">Zeitsteuerung ist für dieses Konto deaktiviert.</string>
 </resources>

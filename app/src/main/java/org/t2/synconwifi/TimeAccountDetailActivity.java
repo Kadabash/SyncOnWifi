@@ -1,5 +1,8 @@
 package org.t2.synconwifi;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
@@ -8,6 +11,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,8 +20,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -36,6 +45,25 @@ public class TimeAccountDetailActivity extends AppCompatActivity {
         // Get account identifier from intent extra:
         Intent intent = getIntent();
         final String accountIdentifier = intent.getStringExtra(ACCOUNT_EXTRA_NAME);
+
+        // Set account name and type on top of this page:
+        String accountType = accountIdentifier.substring(0, accountIdentifier.indexOf(";"));
+        String accountName = accountIdentifier.substring(accountIdentifier.indexOf(";") + 1);
+        Drawable accountIcon = null;
+        PackageManager packageManager = getApplicationContext().getPackageManager();
+        AccountManager accountManager = AccountManager.get(getApplicationContext());
+        AuthenticatorDescription[] descriptions = accountManager.getAuthenticatorTypes();
+        for(AuthenticatorDescription description : descriptions) {
+            if(description.type.equals(accountType)) {
+                accountIcon = packageManager.getDrawable(description.packageName, description.iconId, null);
+            }
+        }
+        ImageView accountIconView = (ImageView) findViewById(R.id.timeDetailAccountImageView);
+        accountIconView.setImageDrawable(accountIcon);
+        TextView accountTypeTextView = (TextView) findViewById(R.id.timeDetailAccountTextViewType);
+        accountTypeTextView.setText(accountType);
+        TextView accountNameTextView = (TextView) findViewById(R.id.timeDetailAccountTextViewName);
+        accountNameTextView.setText(accountName);
 
         // Set start and end times for this account:
         updateTimeDisplay(TimeAccountDetailActivity.this, accountIdentifier);
@@ -71,13 +99,12 @@ public class TimeAccountDetailActivity extends AppCompatActivity {
         });
 
         toggleViewVisibility(TimeAccountDetailActivity.this, accountIdentifier);
-
-        // TODO: Show a message if no settings are set. Replace this message with removeSettingsButton.
     }
 
     // Toggle visibility of deletion button and text:
     private static void toggleViewVisibility(Activity activity, String accountIdentifier) {
         Button removeSettingsButton = (Button) activity.findViewById(R.id.removeTimeSettingsButton);
+        TextView timeControlDetailHeadline = (TextView) activity.findViewById(R.id.timeDetailHeadlineTextView);
 
         // Fetch time settings:
         SharedPreferences accountTimePrefs = activity.getApplicationContext().getSharedPreferences(Preferences.AccountTimes._NAME_, MODE_PRIVATE);
@@ -86,11 +113,15 @@ public class TimeAccountDetailActivity extends AppCompatActivity {
         final int endHour = accountTimePrefs.getInt(accountIdentifier + Preferences.AccountTimes.END_HOUR_SUFFIX, 0);
         final int endMinute = accountTimePrefs.getInt(accountIdentifier + Preferences.AccountTimes.END_MINUTE_SUFFIX, 0);
 
-        // If all times are zero, set Button invisible:
+        // If all times are zero, set Button invisible and add message to headline:
         if(startHour == 0 && startMinute == 0 && endHour == 0 && endMinute == 0) {
             removeSettingsButton.setVisibility(View.INVISIBLE);
+            String newHeadlineText = activity.getApplicationContext().getString(R.string.time_nothing_set)
+                    + " " + activity.getApplicationContext().getString(R.string.time_detail_headline);
+            timeControlDetailHeadline.setText(newHeadlineText);
         } else {
             removeSettingsButton.setVisibility(View.VISIBLE);
+            timeControlDetailHeadline.setText(R.string.time_detail_headline);
         }
     }
 
