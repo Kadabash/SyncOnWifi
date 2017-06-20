@@ -4,13 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 public class BootCompleteReceiver extends BroadcastReceiver{
 
