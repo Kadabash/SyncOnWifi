@@ -33,4 +33,5 @@
     <string name="time_detail_headline">Zeitspanne wählen, in der Synchronisation erlaubt sein soll.</string>
     <string name="time_control_headline">Konto zur Zeitsteuerung antippen</string>
     <string name="time_nothing_set">Zeitsteuerung ist für dieses Konto deaktiviert.</string>
+    <string name="permission_not_granted_notice">Diese App funktioniert nicht ohne Lesezugriff auf Ihre Konten. Bitte öffnen Sie die App erneut und erteilen Sie diesen Zugriff.</string>
 </resources>

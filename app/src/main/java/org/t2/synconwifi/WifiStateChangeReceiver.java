@@ -65,12 +65,14 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         }
     }
 
-    private static boolean withinTimeLimits(Context context, String accountTypeAndName) {
+    public static boolean withinTimeLimits(Context context, String accountTypeAndName) {
         // Get current time:
-        Calendar currentTime = Calendar.getInstance();
-        currentTime.setTimeInMillis(System.currentTimeMillis());
-        final int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
-        final int currentMinute = currentTime.get(Calendar.MINUTE);
+        Calendar currentTimeTmp = Calendar.getInstance();
+        currentTimeTmp.setTimeInMillis(System.currentTimeMillis());
+        Calendar currentTime = Calendar.getInstance();  // This holds only the hour and minute of current time.
+        currentTime.set(Calendar.HOUR_OF_DAY, currentTimeTmp.get(Calendar.HOUR_OF_DAY));
+        currentTime.set(Calendar.MINUTE, currentTimeTmp.get(Calendar.MINUTE));
+        currentTime.set(Calendar.SECOND, currentTimeTmp.get(Calendar.SECOND));
 
         // Get time settings for this account:
         SharedPreferences accountTimePrefs = context.getSharedPreferences(Preferences.AccountTimes._NAME_, Context.MODE_PRIVATE);
@@ -84,18 +86,17 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
             return true;
         }
 
-        // Check if current time is withing bounds:
-        if(currentHour > startHour && currentHour < endHour) {
+        // Check if current time is within bounds:
+        Calendar startTime = Calendar.getInstance();
+        startTime.set(Calendar.HOUR_OF_DAY, startHour);
+        startTime.set(Calendar.MINUTE, startMinute);
+        startTime.set(Calendar.SECOND, 0);
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(Calendar.HOUR_OF_DAY, endHour);
+        endTime.set(Calendar.MINUTE, endMinute);
+        endTime.set(Calendar.SECOND, 0);
+        if(currentTime.after(startTime) && currentTime.before(endTime)) {
             return true;
-        }
-        if(currentHour == startHour && currentMinute >= startMinute) {
-            if(currentHour < endHour) { return true; }
-            if(currentHour == endHour && currentMinute < endMinute) { return true; }
-            return false;
-        }
-        if(currentHour > startHour && currentHour == endHour) {
-            if(currentMinute < endMinute) { return true; }
-            return false;
         }
         return false;
     }

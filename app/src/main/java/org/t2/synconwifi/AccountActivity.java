@@ -70,7 +70,7 @@ public class AccountActivity extends AppCompatActivity {
                     setUpListView();
                 } else {
                     //If permission has NOT been granted:
-                    Toast.makeText(this, "This app will not function without permission to read accounts. Please open the app again and grant it.", Toast.LENGTH_LONG).show(); //TODO: Internationalise string
+                    Toast.makeText(this, getString(R.string.permission_not_granted_notice), Toast.LENGTH_LONG).show();
                 }
             } break;
         }

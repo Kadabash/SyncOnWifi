@@ -32,4 +32,5 @@
     <string name="time_set_start_without_end">Start time saved. Please set end time next</string>
     <string name="time_detail_headline">Set timespan in which synchronisation should be allowed.</string>
     <string name="time_control_headline">Tap account to control times</string>
+    <string name="permission_not_granted_notice">This app will not function without permission to read accounts. Please open the app again and grant it.</string>
 </resources>
