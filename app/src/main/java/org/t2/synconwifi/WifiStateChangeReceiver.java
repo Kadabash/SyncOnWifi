@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.SyncAdapterType;
 import android.net.Network;
 import android.net.NetworkInfo;
+import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -33,12 +34,13 @@ public class WifiStateChangeReceiver extends BroadcastReceiver {
         NetworkInfo newNetworkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        SupplicantState supplicantState = wifiInfo.getSupplicantState();
 
         AccountManager accountManager = AccountManager.get(context.getApplicationContext());
         SharedPreferences sharedPreferencesActiveAccounts = context.getApplicationContext().getSharedPreferences("AccountsActive", Context.MODE_PRIVATE);
 
         //If we are disconnected/disconnecting from any network, disable account synchronisation:
-        if((wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) || (wifiManager.getWifiState() ==  WifiManager.WIFI_STATE_DISABLING)) {
+        if((wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) || (wifiManager.getWifiState() ==  WifiManager.WIFI_STATE_DISABLING) || supplicantState == SupplicantState.DISCONNECTED) {
             //Check whether each account is in the shared preferences of active accounts:
             for(Account account : accountManager.getAccounts()) {
                 String accountTypeAndName = account.type + ";" + account.name;
