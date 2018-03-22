@@ -2,6 +2,9 @@
 Ever had an account on your android device that you want to sync only when you're at home? Ever wished you could have your work email stop synchronising when you leave the office?
 SyncOnWifi handles this for you. It automatically switches synchronisation of your account on or off, depending on the WiFi network you are connected to.
 
+<a href="https://f-droid.org/packages/org.t2.synconwifi/" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
+
 The following permission are required:
 * **WiFi / network status** to react to WiFi network connecting / disconnecting.
 * **Contacts / Accounts access** to read which accounts there are on your device. *NO* contact data is accessed.
